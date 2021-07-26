@@ -1,0 +1,35 @@
+{
+  "name": "test-task",
+  "version": "1.0.0",
+  "description": "Esoft junior test task",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "server": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vdedenev/jun-test-task.git"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "react"
+  ],
+  "author": "Viktor Dedenev <v.s.dedenev@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vdedenev/jun-test-task/issues"
+  },
+  "homepage": "https://github.com/vdedenev/jun-test-task#readme",
+  "dependencies": {
+    "config": "^3.3.6",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "typeorm": "^0.2.34"
+  },
+  "devDependencies": {
+    "concurrently": "^6.2.0",
+    "nodemon": "^2.0.12"
+  }
+}
