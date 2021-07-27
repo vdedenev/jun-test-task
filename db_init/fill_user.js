@@ -38,7 +38,9 @@ async function insert() {
     }
 
     await typeorm.getRepository('User').save(dataArr);
-    console.log('--User inserted--')
+    console.log('--User insert successful--')
+
+    process.exit()
 }
 
 insert()
