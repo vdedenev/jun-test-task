@@ -37,22 +37,23 @@ module.exports = new EntitySchema({
             target: "User",
             type: "many-to-one",
             joinTable: true,
-            joinColumn: true,
+            //joinColumn: true,
         },
 
-        workers: {
+        worker: {
             target: "User",
             type: "one-to-many",
             joinTable: true,
             cascade: true,
             inverseSide: 'owner',
+            //joinColumn: "id",
         },
 
         responsible: {
             target: "Task",
             type: "one-to-many",
             joinTable: true,
-            cascade: true
+            inverseSide: 'responsible',
         }
     }
 });

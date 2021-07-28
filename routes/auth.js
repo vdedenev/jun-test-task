@@ -10,9 +10,7 @@ authRouter.get('/login',
             .isLength({min:5, max:20})
             .matches(/^([A-z_]*)$/),
         check('password', 'wrong password format')
-            .notEmpty()
-            .isLength({min:5, max:20})
-            .matches(/^([A-z_]*)$/),
+            .notEmpty(),
     ],
 authController.login)
 //authRouter.post ('/registration', authController.registration)

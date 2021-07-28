@@ -30,6 +30,7 @@
     "dateformat": "^4.5.1",
     "express": "^4.17.1",
     "express-validator": "^6.12.1",
+    "moment": "^2.29.1",
     "mysql": "^2.18.1",
     "typeorm": "^0.2.34"
   },

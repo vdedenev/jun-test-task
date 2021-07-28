@@ -6,12 +6,12 @@ const {check, query,  validationResult} = require('express-validator')
 // task task?page=2 task?page=2&groupby=param
 taskRouter.get('/task',
     [
-        query('page', 'page errors').isNumeric().optional(),
-        query('group', 'group errors').isNumeric().optional()
+        query('page', 'page errors').isInt({min: 1}).optional(),
+        query('group', 'group errors').isInt({min: 1, max: 3}).optional()
     ],
     taskController.get)
 
-taskRouter.get('/', taskController.getAll)
+taskRouter.get('/', taskController.get)
 
 //articleRouter.get('/:id', articleController.getOne);
 //articleRouter.post ('/', articleController.add);
