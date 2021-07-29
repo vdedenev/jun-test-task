@@ -9,7 +9,7 @@ authRouter.post('/login',
             .notEmpty()
             .isLength({min:5, max:20})
             .matches(/^([A-z_]*)$/),
-        check('password', 'wrong password format')
+        check('pass', 'wrong password format')
             .notEmpty(),
     ],
 authController.login)
