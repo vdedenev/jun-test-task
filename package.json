@@ -6,6 +6,8 @@
   "scripts": {
     "start": "node app.js",
     "server": "nodemon app.js",
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
     "fillTables": "node db_init/fill_user.js && node db_init/fill_task.js",
     "dropTables": "node db_init/drop_tables.js"
   },
