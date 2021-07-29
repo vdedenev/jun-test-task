@@ -36,7 +36,7 @@ exports.get = async (req, res) => {
                     skip: (pageNum -1)*10,
                     take: 10,
                     where: {
-                        responsible: 4, //useId
+                        responsible: req.user.userId,
                         endingAt: dateformat(new Date(), 'yyyy-mm-dd'),
                     }
                 })
@@ -51,7 +51,7 @@ exports.get = async (req, res) => {
                         skip: (pageNum-1) * 10,
                         take: 10,
                         where: {
-                            responsible: 2, //useId
+                            responsible: req.user.userId,
                             endingAt: Between(
                                 dateformat(startOfWeek, 'yyyy-mm-dd'),
                                 dateformat(endOfWeek, 'yyyy-mm-dd')
@@ -68,7 +68,7 @@ exports.get = async (req, res) => {
                         skip: (pageNum-1) * 10,
                         take: 10,
                         where: {
-                            responsible: 2, //useId
+                            responsible: req.user.userId,
                             endingAt: MoreThan(dateformat(startInterval, 'yyyy-mm-dd'))
                         }
                     })
@@ -91,7 +91,7 @@ exports.get = async (req, res) => {
                     await typeorm.getRepository('User').find({
                         relations: ['worker', 'worker.responsible'],
                         where: {
-                            id: 1, // userId
+                            id: req.user.userId,
                         }
                     })
                 )

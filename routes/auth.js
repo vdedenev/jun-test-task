@@ -3,7 +3,7 @@ const authRouter = express.Router()
 const authController = require('../controllers/auth.controller')
 const {check} = require('express-validator')
 
-authRouter.get('/login',
+authRouter.post('/login',
     [
         check('login', 'wrong login format')
             .notEmpty()
