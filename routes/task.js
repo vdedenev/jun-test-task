@@ -13,11 +13,15 @@ taskRouter.get('/task',
     taskController.get)
 
 taskRouter.get('/', verifyToken, taskController.get)
+taskRouter.post ('/task/add', verifyToken, taskController.add);
 
-//articleRouter.get('/:id', articleController.getOne);
-//articleRouter.post ('/', articleController.add);
-//articleRouter.put('/:id', articleController.update);
-//articleRouter.delete('/post/:id', articleController.delete);
+taskRouter.get('/user/:id', [
+        verifyToken,
+        check('id', 'param errors').isInt({min: 1}).notEmpty(),
+    ],
+taskController.getOne);
+//taskRouter.put('/:id', taskRouter.update);
+//taskRouter.delete('/post/:id', taskRouter.delete);
 
 
 

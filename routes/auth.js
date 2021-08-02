@@ -13,6 +13,7 @@ authRouter.post('/login',
             .notEmpty(),
     ],
 authController.login)
+
 //authRouter.post ('/registration', authController.registration)
 //authRouter.delete('/delete',authController.delete)
 //authRouter.put('/update',authController.update)

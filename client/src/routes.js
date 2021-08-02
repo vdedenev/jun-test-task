@@ -7,20 +7,20 @@ export const useRoutes = isAuth => {
     if (isAuth){
         return (
             <Switch>
-                <Route path="/task">
-                    <TaskPage />
+                <Route exact path="/task">
+                        <TaskPage />
                 </Route>
-                <Route exact path="/">
-                    <TaskPage />
+                <Route exact path="/task/:query">
+                        <TaskPage />
                 </Route>
-                <Redirect to="/" />
+                <Redirect to="/task?group=3"/>
             </Switch>
         )
     }
 
     return (
         <Switch>
-            <Route exact path="/auth/login">
+            <Route path="/auth/login">
                 <AuthPage />
             </Route>
             <Redirect to="/auth/login"/>

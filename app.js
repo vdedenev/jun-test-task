@@ -7,6 +7,7 @@ const app = express()
 app.use(express.json())
 app.use('/', require('./routes/task'))
 app.use('/auth/', require('./routes/auth'))
+app.use('/user/', require('./routes/task'))
 
 
 const PORT = config.get('port')

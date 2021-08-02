@@ -23,7 +23,7 @@ exports.login = async (req, res) => {
             },
                 config.get('TOKEN_SECRET'),
                 {
-                    expiresIn: '1h'
+                    expiresIn: '3h'
                 })
             return res.status(200).json({
                 token,

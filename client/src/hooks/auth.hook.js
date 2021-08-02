@@ -2,6 +2,7 @@ import {useState, useCallback, useEffect} from 'react'
 
 export const useAuth = () => {
     const [token, setToken] = useState(null)
+    const [ready, setReady] = useState(false) // for wait async check isAuth
     const [userId, setUserId] = useState(null)
     const [userSecondName, setUserSecondName] = useState(null)
     const [userMiddleName, setUserMiddleName] = useState(null)
@@ -34,8 +35,9 @@ export const useAuth = () => {
         if (data && data.token){
             login(data.token, data.userId, data.userSecondName, data.userMiddleName)
         }
+        setReady(true)
     }, [login])
 
 
-    return {login, logout, token, userId, userSecondName, userMiddleName}
+    return {login, logout, token, userId, userSecondName, userMiddleName, ready}
 }
