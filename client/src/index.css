@@ -75,7 +75,7 @@
 }
 
 
-#tasks {
+#tasks, #addTask {
     border-collapse: collapse;
     border: 3px solid #ddd;
 }
@@ -94,6 +94,10 @@
     padding: 10px;
     text-align: center;
     color: white;
+}
+
+.input-field{
+    padding-block: 6px;
 }
 
 .modal__wrapper {

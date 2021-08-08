@@ -21,14 +21,17 @@ exports.login = async (req, res) => {
             const token = jwt.sign({
                 userId: result.id
             },
-                config.get('TOKEN_SECRET'),
-                {
-                    expiresIn: '3h'
-                })
+                config.get('TOKEN_SECRET')
+                //{
+                 //   expiresIn: '3h'
+               // }
+            )
+            console.log(result)
             return res.status(200).json({
                 token,
                 userId: result.id,
-                userName: result.secondName,
+                userFirstName: result.firstName,
+                userSecondName: result.secondName,
                 userMiddleName: result.middleName
             })
         }

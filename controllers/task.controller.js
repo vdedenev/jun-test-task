@@ -17,11 +17,11 @@ exports.get = async (req, res) => {
 
     async function getAllTasks(pageNum){
           const myObj =  await typeorm.getRepository('Task').find({
-                relations: ['responsible'],
+                relations: ['responsible', 'creator'],
                 skip: (pageNum - 1) * 10,
                 take: 10,
                 order: {
-                    updatedAt: "ASC"
+                    updatedAt: "DESC"
                 }
             })
         res.status(200).json(myObj)
@@ -31,7 +31,7 @@ exports.get = async (req, res) => {
         switch(lapse) {
             case 'today':
                 res.status(200).json(await typeorm.getRepository('Task').find({
-                    relations: ['responsible'],
+                    relations: ['responsible', 'creator'],
                     skip: (pageNum -1)*10,
                     take: 10,
                     where: {
@@ -46,7 +46,7 @@ exports.get = async (req, res) => {
                 const endOfWeek = moment().endOf('isoWeek').toDate();
                 res.status(200).json(
                     await typeorm.getRepository('Task').find({
-                        relations: ['responsible'],
+                        relations: ['responsible', 'creator'],
                         skip: (pageNum-1) * 10,
                         take: 10,
                         where: {
@@ -63,7 +63,7 @@ exports.get = async (req, res) => {
                 const startInterval = moment().endOf('isoWeek').toDate();
                 res.status(200).json(
                     await typeorm.getRepository('Task').find({
-                        relations: ['responsible'],
+                        relations: ['responsible', 'creator'],
                         skip: (pageNum-1) * 10,
                         take: 10,
                         where: {
@@ -84,14 +84,16 @@ exports.get = async (req, res) => {
                 await getSelfTasksByInterval(pageNum, grouping, lapse)
                 break
             case 2:
-                res.status(200).json(
-                await typeorm.getRepository('Task').createQueryBuilder('task')
+                const queryRes = await typeorm.getRepository('Task').createQueryBuilder('task')
+                    .innerJoinAndSelect("task.creator", "creator")
                     .innerJoinAndSelect("task.responsible", "user")
                     .innerJoinAndSelect("user.owner", "owner")
                     .where("owner.id = :id", {id: req.user.userId})
                     .orderBy("user.firstName", "ASC")
+                    .skip((pageNum-1) * 10)
+                    .take(10)
                     .getMany()
-                )
+                res.status(200).json(queryRes)
                 break
             case 3:
                 await getAllTasks(pageNum)
@@ -100,7 +102,7 @@ exports.get = async (req, res) => {
     }
 
     if(!validationResult(req).isEmpty())
-        return res.status(400).json({message: 'bad querry params'}) //bad request error
+        return res.status(400).json({message: 'bad query params'}) //bad request error
 
     if (req.query['page'] && req.query['group'])
         return getGroupingTasks(Number(req.query['page']), Number(req.query['group']), req.query['lapse'])
@@ -121,31 +123,26 @@ exports.getOne = async (req, res) =>{
             .innerJoinAndSelect("user.owner", "owner")
             .where("owner.id = :id", {id: req.params.id})
             .getMany()
-
     res.status(200).json(myObj)
 
 }
 
-exports.add = async (req, res) => {
-    const userRepository = typeorm.getRepository('Task')
+exports.save = async (req, res) => {
+    if(!validationResult(req).isEmpty())
+        res.status(400).json(validationResult(req)) //bad request error
 
-    let newTask = {
-        title: req.body.login,
-        description: '',
-        endingAt: '',
-        createdAt: '',
-        updatedAt: '',
-        priority: 1,
-        status: 1,
-        relation: {id:1},
-        creator: {id:1}
+    try {
+        res.status(200).json(await typeorm.getRepository('Task').save
+        ({
+            ...req.body,
+            createdAt: dateformat(new Date()),
+            updatedAt: dateformat(new Date()),
+        }))
     }
-    await userRepository.save(newTask);
-    res.status(201).json(newTask); // !
-}
-
-exports.update = async (req, res) => {
-
+    catch (e) {
+        console.log(e.message)
+        res.status(500)// ?
+    }
 }
 
 exports.delete = async (req, res) => {

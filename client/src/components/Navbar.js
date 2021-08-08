@@ -96,12 +96,7 @@ export const Navbar = () => {
                     </ul>
                 </div>
             </nav>
-            <button
-                style={{marginLeft: 10, marginTop: 10}}
-                className="btn modal-trigger cyan darken-2"
-                onClick={() => setIsOpen(true)}>
-                Add Task
-            </button>
+
             <Modal
                 isOpen={modalIsOpen}
 

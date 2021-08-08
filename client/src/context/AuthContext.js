@@ -5,9 +5,11 @@ function nothing() {}
 export const AuthContext = createContext({
     token: null,
     userId: null,
+    userFirstName: null,
     userSecondName: null,
     userMiddleName: null,
     login: nothing,
     logout: nothing,
-    isAuth: false
+    isAuth: false,
+    loginReady: false
 })
