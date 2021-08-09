@@ -8,17 +8,21 @@ import {MyTable} from "../components/Table"
 import {Test} from "../components/Test"
 import {ModalComp} from "../components/Modal";
 import dateFormat from 'dateformat'
-import {useLocation} from "react-router-dom";
+import {Redirect, useHistory, useLocation} from "react-router-dom";
 import {Loader} from "../components/Loader";
+import {MyPagination, Pagination} from "../components/Pagination";
 
 
 export const TaskPage = () => {
     const auth = useContext(AuthContext)
+    const history = useHistory()
     const queryLink = useLocation().search;
     const {loading, req} = useHttp()
     const [tasks, setTasks] = useState([])
     const [rerenderTable, setRerenderTable] = useState(1)
     const [responsible, setResponsible] = useState([])
+    const [currentPage, setCurrentPage] = useState(1)
+    const [maxPages, setMaxPages] = useState(20)
 
     const getData = async () => {
         try {
@@ -51,13 +55,26 @@ export const TaskPage = () => {
         }
     }
 
+    const getCurrentPage = () => {
+        if (queryLink) {
+            const pageNum = Number(new URLSearchParams(queryLink).get('page'))
+            if (pageNum) {
+                pageNum > maxPages ? setCurrentPage(0) : setCurrentPage(pageNum)
+            } else
+                setCurrentPage(1)
+        } else {
+            setCurrentPage(1)
+        }
+    }
+
     useEffect(() => {
-        if(!auth.loginReady)
+        if (!auth.loginReady)
             return <Loader/>
 
         console.log('useeffect render')
         getData()
         getResponsible()
+        getCurrentPage()
 
     }, [auth.loginReady, req, rerenderTable])
 
@@ -72,9 +89,13 @@ export const TaskPage = () => {
                 tableHeaders={['id', 'title', 'description', 'priority', 'ending at', 'updated at', 'responsible', 'status']}
                 tableData={tasks}
                 responsible={responsible}
-                rerender={() => setRerenderTable(rerenderTable+1)}
+                rerender={() => {setRerenderTable(rerenderTable + 1)}}
+            />}
+            <MyPagination
+                rerender={() => setRerenderTable(rerenderTable + 1)}
+                maxPages={maxPages}
+                currentPage={currentPage}
             />
-            }
         </>
     )
 }

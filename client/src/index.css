@@ -1,4 +1,5 @@
 @import "~materialize-css/dist/css/materialize.min.css";
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
 .menu-container {
     position: relative;
@@ -150,4 +151,17 @@
     text-align: left;
     width: 100%;
     margin: 0;
+}
+
+.pagination {
+    text-align: center;
+}
+
+.pagination li {
+    cursor: pointer;
+}
+
+.disabledA {
+    pointer-events: none;
+    cursor: default;
 }

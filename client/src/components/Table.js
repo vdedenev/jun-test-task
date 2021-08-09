@@ -312,6 +312,7 @@ export const MyTable = (props) => {
     }
 
     const renderBody = () => {
+        console.log('123')
         return !!props.tableData.length && props.tableData.map(
             ({id, title, description, priority, endingAt, updatedAt, responsible, status, creator}) => {
                 const taskData = {id, title, description, priority, endingAt, updatedAt, responsible, status, creator}

@@ -8,7 +8,6 @@ import {Loader} from "./components/Loader";
 
 //TODO
 //all mysql reqs select only needle params (exclude pass\login)
-//creatorId when grouping 2
 //reafactor
 
 function App() {

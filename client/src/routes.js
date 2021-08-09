@@ -10,9 +10,7 @@ export const useRoutes = isAuth => {
                 <Route exact path="/task">
                         <TaskPage />
                 </Route>
-                <Route exact path="/task/:query">
-                        <TaskPage />
-                </Route>
+
                 <Redirect to="/task?group=3"/>
             </Switch>
         )
