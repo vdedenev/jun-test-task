@@ -6,18 +6,19 @@ const path = require("path");
 const app = express()
 
 app.use(express.json())
-app.use('/', require('./routes/task'))
+// app.use('/', require('./routes/task'))
 app.use('/auth/', require('./routes/auth'))
 app.use('/user/', require('./routes/user'))
 
-if (process.env.NODE_ENV === 'production') {
+//if (process.env.NODE_ENV === 'production') {
     console.log('123')
     app.use('/', express.static(path.join(__dirname, 'client', 'build')))
 
     app.get('*', (req, res) => {
+        console.log('321')
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
     })
-}
+// }
 
 
 //const PORT = config.get('port')
