@@ -37,7 +37,6 @@ export const TaskPage = () => {
             const data = await req(`/user/${auth.userId}`, 'GET', null, {
                 Authorization: `Bearer ${auth.token}`
             })
-            console.log(data)
             if (data.length === 0) {
                 setResponsible([{value: auth.userId, label: auth.userFirstName}])
             } else {

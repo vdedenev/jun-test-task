@@ -13,8 +13,6 @@ exports.login = async (req, res) => {
         select: ['id', 'login', 'password', 'firstName', 'secondName', 'middleName',]
     })
 
-    console.log(result)
-
     if (!result)
         return res.status(400).json({message: 'no user found'})
 
@@ -31,7 +29,6 @@ exports.login = async (req, res) => {
                  //   expiresIn: '3h'
                // }
             )
-            console.log(result)
             return res.status(200).json({
                 token,
                 userId: result.id,
