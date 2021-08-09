@@ -47,7 +47,6 @@ module.exports = new EntitySchema({
             target: "User",
             type: "one-to-many",
             joinTable: true,
-            cascade: true,
             inverseSide: 'owner',
             //joinColumn: "id",
         },
