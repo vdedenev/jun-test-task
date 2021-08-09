@@ -4,7 +4,7 @@ const taskController = require('../controllers/task.controller')
 const {check, query} = require('express-validator')
 const verifyToken = require('./verifyToken')
 
-taskRouter.get('/task',
+taskRouter.get('/get',
     [
         verifyToken,
         query('page', 'page errors').isInt({min: 1}).optional(),
@@ -13,8 +13,8 @@ taskRouter.get('/task',
     ],
     taskController.get)
 
-taskRouter.get('/', verifyToken, taskController.get)
-taskRouter.post('/task/save', [
+// taskRouter.get('/', verifyToken, taskController.get)
+taskRouter.post('/save', [
     verifyToken,
     query('id', 'ids errors').optional().isInt({min: 1}),
     check('title', 'title errors').notEmpty(),

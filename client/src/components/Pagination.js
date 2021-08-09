@@ -37,7 +37,6 @@ export const MyPagination = (props) => {
             itemClass='waves-effect'
             onChange={pageChangeHandler}
             hideFirstLastPages={true}
-
         />
     )
 }

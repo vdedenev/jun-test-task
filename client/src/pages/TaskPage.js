@@ -23,7 +23,7 @@ export const TaskPage = () => {
 
     const getData = async () => {
         try {
-            const data = await req(`/task${queryLink}`, 'GET', null, {
+            const data = await req(`/task/get${queryLink}`, 'GET', null, {
                 Authorization: `Bearer ${auth.token}`
             })
             setTasks(data)
