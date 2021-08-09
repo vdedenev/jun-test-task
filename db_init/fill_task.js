@@ -27,7 +27,7 @@ async function insert() {
     catch (e) {
         throw e.message
     }
-    await typeorm.getRepository('Task').query("SET FOREIGN_KEY_CHECKS = 1")
+    await typeorm.getRepository('Task').query("SET FOREIGN_KEY_CHECKS = 0")
     await typeorm.getRepository('Task').save(dataArr);
     console.log('--Task insert successful--')
 

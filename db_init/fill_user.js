@@ -37,9 +37,8 @@ async function insert() {
         throw e.message
     }
 
-    const newUser = {firstName: 'Иванов', secondName: 'Иван', middleName: 'Иванович', login: 'ivanov_ivan',
-        password: bcrypt.hashSync('ivanov_ivan', sR), owner: null}
-    await typeorm.getRepository('User').save(newUser);
+    await typeorm.getRepository('Task').query("SET FOREIGN_KEY_CHECKS = 0")
+    await typeorm.getRepository('User').save(dataArr);
     console.log('--User insert successful--')
 
     process.exit()
