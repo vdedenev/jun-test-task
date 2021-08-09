@@ -24,11 +24,13 @@ module.exports = new EntitySchema({
         },
 
         login:{
-            type: "varchar"
+            type: "varchar",
+            select: false
         },
 
         password:{
-            type: "varchar"
+            type: "varchar",
+            select: false
         },
 
     },

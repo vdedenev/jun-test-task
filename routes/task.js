@@ -8,7 +8,8 @@ taskRouter.get('/task',
     [
         verifyToken,
         query('page', 'page errors').isInt({min: 1}).optional(),
-        query('group', 'group errors').isInt({min: 1, max: 3}).optional()
+        query('grouping', 'group errors').toLowerCase().isIn(['self', 'subordinate', 'all']).optional(),
+        query('lapse', 'lapse errors').toLowerCase().isIn(['today', 'thisweek', 'nextweek']).optional()
     ],
     taskController.get)
 

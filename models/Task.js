@@ -31,11 +31,11 @@ module.exports = new EntitySchema({
         },
 
         priority:{
-            type: "tinyint"
+            type: "varchar",
         },
 
         status:{
-            type: "tinyint"
+            type: "varchar",
         },
     },
     relations: {

@@ -19,16 +19,16 @@ export const ModalComp = (props) => {
 
 
     const priorityOptions = [
-        {value: 3, label: 'Высокий'},
-        {value: 2, label: 'Средний'},
-        {value: 1, label: 'Низкий'},
+        {value: 'high', label: 'Высокий'},
+        {value: 'medium', label: 'Средний'},
+        {value: 'low', label: 'Низкий'},
     ]
 
     const statusOptions = [
-        {value: 4, label: 'К выполнению'},
-        {value: 3, label: 'Выполняется'},
-        {value: 2, label: 'Выполнено'},
-        {value: 1, label: 'Отменено'},
+        {value: 'toImplementation', label: 'К выполнению'},
+        {value: 'inProgress', label: 'Выполняется'},
+        {value: 'completed', label: 'Выполнено'},
+        {value: 'canceled', label: 'Отменено'},
     ]
 
     const changeHandler = e => {

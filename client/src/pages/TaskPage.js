@@ -49,7 +49,6 @@ export const TaskPage = () => {
 
             }
         } catch (e) {
-            message('hui')
             message(e.message)
         }
     }

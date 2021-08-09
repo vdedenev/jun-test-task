@@ -47,15 +47,15 @@ export const Navbar = () => {
                     >
                         <ul>
                             <li><a
-                                href='/task?group=1&lapse=today'>
+                                href='/task?grouping=self&lapse=today'>
                                 Today
                             </a></li>
                             <li><a
-                                href='/task?group=1&lapse=week'>
+                                href='/task?grouping=self&lapse=thisweek'>
                                 This week
                             </a></li>
                             <li><a
-                                href='/task?group=1&lapse=all'>
+                                href='/task?grouping=self&lapse=nextweek'>
                                 Past week+
                             </a></li>
                         </ul>
@@ -63,13 +63,13 @@ export const Navbar = () => {
                     <a
                         style={{marginLeft: 10}}
                         className="btn cyan darken-2"
-                        href='/task?group=2'>
+                        href='/task?grouping=subordinate'>
                         Subordinate
                     </a>
                     <a
                         style={{marginLeft: 10}}
                         className="btn cyan darken-2"
-                        href='/task?group=3'>
+                        href='/task?grouping=all'>
                         All (Updated order)
                     </a>
 

@@ -17,36 +17,34 @@ export const MyTable = (props) => {
         id: null,
         title: 'Task name',
         description: 'Task description',
-        priority: 2,
+        priority: 'medium',
         endingAt: dateFormat(new Date(), 'yyyy-mm-dd'),
         responsible: auth.userId,
-        status: 4,
+        status: 'toImplementation',
     }
     const [modalContext, setModalContext] = useState(addModalContext)
 
-    // priority - 3 высокий, 2 средний, 1 низкий
-    // status - 4 к выполнению, 3 выполняется, 2 выполнено, 1 отменено
-    const convertStatus = (status_id) => {
-        switch (status_id) {
-            case 4:
+    const convertStatus = (status) => {
+        switch (status) {
+            case 'toImplementation':
                 return 'К выполнению'
-            case 3:
+            case 'inProgress':
                 return 'Выполняется'
-            case 2:
+            case 'completed':
                 return 'Выполнено'
-            case 1:
+            case 'canceled':
                 return 'Отменено'
             default: return
         }
     }
 
-    const convertPriority = (priority_id) => {
-        switch (Number(priority_id)) {
-            case 3:
+    const convertPriority = (priority) => {
+        switch (priority) {
+            case 'high':
                 return 'Высокий'
-            case 2:
+            case 'medium':
                 return 'Средний'
-            case 1:
+            case 'low':
                 return 'Низкий'
             default: return
         }
@@ -54,9 +52,9 @@ export const MyTable = (props) => {
 
     const getStrColor = (status, endingAt) => {
         switch (status) {
-            case 2:
+            case 'completed':
                 return 'green lighten-3'
-            case 3:
+            case 'inProgress':
                 if (dateFormat(Date(), 'yyyy-mm-dd') > endingAt) {
                     return 'red lighten-3'
                 }
@@ -116,7 +114,7 @@ export const MyTable = (props) => {
                 const taskData = {id, title, description, priority, endingAt, updatedAt, responsible, status, creator}
                 return (
                     <tr key={id} onClick={() => editTR(taskData)}
-                        className={getStrColor(Number(status), endingAt)}>
+                        className={getStrColor(status, endingAt)}>
                         <td key='id'>{id}</td>
                         <td key='title'>{title}</td>
                         <td key='description'>{description}</td>
