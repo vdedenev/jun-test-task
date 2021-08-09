@@ -36,6 +36,7 @@ export const MyTable = (props) => {
                 return 'Выполнено'
             case 1:
                 return 'Отменено'
+            default: return
         }
     }
 
@@ -47,6 +48,7 @@ export const MyTable = (props) => {
                 return 'Средний'
             case 1:
                 return 'Низкий'
+            default: return
         }
     }
 

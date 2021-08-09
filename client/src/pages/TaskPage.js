@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react'
-import {useHistory, useLocation} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 import 'materialize-css'
 import {AuthContext} from "../context/AuthContext"
 import {Navbar} from "../components/Navbar"
@@ -37,6 +37,7 @@ export const TaskPage = () => {
             const data = await req(`/user/${auth.userId}`, 'GET', null, {
                 Authorization: `Bearer ${auth.token}`
             })
+            console.log(data)
             if (data.length === 0) {
                 setResponsible([{value: auth.userId, label: auth.userFirstName}])
             } else {
@@ -48,6 +49,7 @@ export const TaskPage = () => {
 
             }
         } catch (e) {
+            message('hui')
             message(e.message)
         }
     }

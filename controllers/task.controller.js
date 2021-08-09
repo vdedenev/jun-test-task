@@ -116,18 +116,6 @@ exports.get = async (req, res) => {
 
 }
 
-exports.getOne = async (req, res) =>{
-    if(!validationResult(req).isEmpty())
-        return res.status(400).json({message: 'bad querry params'}) //bad request error
-
-    const myObj = await typeorm.getRepository('User').createQueryBuilder('user')
-            .innerJoinAndSelect("user.owner", "owner")
-            .where("owner.id = :id", {id: req.params.id})
-            .getMany()
-    res.status(200).json(myObj)
-
-}
-
 exports.save = async (req, res) => {
     if(!validationResult(req).isEmpty())
         res.status(400).json(validationResult(req)) //bad request error
@@ -144,8 +132,4 @@ exports.save = async (req, res) => {
         console.log(e.message)
         res.status(500)// ?
     }
-}
-
-exports.delete = async (req, res) => {
-
 }

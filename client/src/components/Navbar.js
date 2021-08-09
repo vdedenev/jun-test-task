@@ -80,7 +80,7 @@ export const Navbar = () => {
                         </li>
                         <li><a
                             className="btn cyan darken-2"
-                            href=''
+                            href='/'
                             onClick={logoutHandler}>logout
                         </a></li>
                     </ul>

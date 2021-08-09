@@ -7,16 +7,11 @@ import 'materialize-css'
 export const AuthPage = () => {
     const auth = useContext(AuthContext)
     const message = useMessage()
-    const {loading, req, err, clearErr} = useHttp()
+    const {loading, req} = useHttp()
     const [form, setForm] = useState({
         login: '',
         pass: ''
     })
-
-    useEffect(() => {
-        message(err)
-        clearErr()
-    }, [err, clearErr, message])
 
     useEffect(() => {
         window.M.updateTextFields()
@@ -31,7 +26,7 @@ export const AuthPage = () => {
             const data = await req('/auth/login', 'POST', {...form})
             auth.login(data.token, data.userId, data.userFirstName, data.userSecondName, data.userMiddleName)
         } catch (e) {
-
+            message(e.message)
         }
     }
 

@@ -13,7 +13,7 @@ taskRouter.get('/task',
     taskController.get)
 
 taskRouter.get('/', verifyToken, taskController.get)
-taskRouter.post ('/task/save',[
+taskRouter.post('/task/save', [
     verifyToken,
     query('id', 'ids errors').optional().isInt({min: 1}),
     check('title', 'title errors').notEmpty(),
@@ -24,16 +24,5 @@ taskRouter.post ('/task/save',[
     check('creator', 'creator errors').notEmpty(),
     check('responsible', 'responsible errors').notEmpty(),
 ], taskController.save);
-
-taskRouter.get('/user/:id', [
-        verifyToken,
-        check('id', 'param errors').isInt({min: 1}).notEmpty(),
-    ],
-taskController.getOne);
-
-//taskRouter.put('/:id', taskRouter.update);
-//taskRouter.delete('/post/:id', taskRouter.delete);
-
-
 
 module.exports = taskRouter

@@ -11,16 +11,12 @@ export const ModalComp = (props) => {
     const message = useMessage()
     const auth = useContext(AuthContext)
     const [form, setForm] = useState(props.rowData)
-    const {loading, req, err, clearErr} = useHttp()
+    const {loading, req} = useHttp()
 
     useEffect(() => {
         setForm(props.rowData)
     }, [props.rowData])
 
-    useEffect(() => {
-        message(err)
-        clearErr()
-    }, [err, clearErr, message])
 
     const priorityOptions = [
         {value: 3, label: 'Высокий'},
@@ -48,7 +44,7 @@ export const ModalComp = (props) => {
             const sendData = await req(`/task/${props.buttonLnk}`, 'POST', {...form, creator: auth.userId}, {
                 Authorization: `Bearer ${auth.token}`
             })
-            message('Done, task id: '+sendData.id)
+            message('Success, task id: '+sendData.id)
             props.rerender()
             props.onClose()
         } catch (e) {
