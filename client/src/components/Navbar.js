@@ -1,44 +1,34 @@
-import React, {useContext, useEffect, useRef, useState,} from 'react'
+import React, {useContext, useRef, useState,} from 'react'
 import {useHistory} from "react-router-dom";
 import {AuthContext} from "../context/AuthContext";
 import 'materialize-css'
 import {useDetectOutsideClick} from "../hooks/dropmenu.hook";
 import Modal from 'react-modal'
-import {useHttp} from "../hooks/http.hook";
-
 
 export const Navbar = () => {
-    Modal.setAppElement(document.getElementById('root'))
     const dropdownRef = useRef(null);
     const [isActive, setIsActive] = useDetectOutsideClick(dropdownRef, false);
+    const [modalIsOpen, setIsOpen] = useState(false);
     const onClick = () => setIsActive(!isActive);
 
     const auth = useContext(AuthContext)
     const history = useHistory()
 
-    const logoutHandler = event =>{
+    const logoutHandler = event => {
         event.preventDefault()
         auth.logout()
-        history.push('/')
+        history.push('/login')
     }
 
     const customStyles = {
-        content : {
-            top                   : '20%',
-            left                  : '50%',
-            right                 : 'auto',
-            bottom                : 'auto',
-            marginRight           : '-50%',
-            transform             : 'translate(-50%, -50%)'
+        content: {
+            top: '20%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            marginRight: '-50%',
+            transform: 'translate(-50%, -50%)'
         }
-    }
-    const [modalIsOpen,setIsOpen] = useState(false);
-    function openModal() {
-       // setIsOpen(true);
-    }
-
-    function closeModal(){
-       // setIsOpen(false);
     }
 
     return (
@@ -86,7 +76,7 @@ export const Navbar = () => {
                     <ul id="nav-mobile" className="right hide-on-med-and-down">
                         <li
                             style={{marginRight: 10}}>
-                            Здравствуйте, {auth.userSecondName}  {auth.userMiddleName}
+                            Здравствуйте, {auth.userSecondName} {auth.userMiddleName}
                         </li>
                         <li><a
                             className="btn cyan darken-2"
@@ -99,16 +89,15 @@ export const Navbar = () => {
 
             <Modal
                 isOpen={modalIsOpen}
-
                 onRequestClose={() => setIsOpen(false)}
                 style={customStyles}
                 contentLabel="Example Modal">
 
-                <h4 >Hello</h4>
+                <h4>Hello</h4>
                 <button onClick={() => setIsOpen(false)}>close</button>
                 <div>I am a modal</div>
                 <form>
-                    <input />
+                    <input/>
                     <button>tab navigation</button>
                     <button>stays</button>
                     <button>inside</button>

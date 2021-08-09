@@ -39,15 +39,3 @@ exports.login = async (req, res) => {
             return res.status(400).json({message: 'invalid password'});
     })
 }
-//
-// exports.registration = async (req,res) => {
-//
-// }
-//
-// exports.delete = async(req, res)=>{
-//
-// }
-//
-// exports.update = async(req, res) =>{
-//
-// }

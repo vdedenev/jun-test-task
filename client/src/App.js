@@ -6,18 +6,22 @@ import {useAuth} from "./hooks/auth.hook";
 import {AuthContext} from "./context/AuthContext";
 import {Loader} from "./components/Loader";
 
-//TODO
-//all mysql reqs select only needle params (exclude pass\login)
-//reafactor
-
 function App() {
-    const {token, userId, userFirstName, userSecondName, userMiddleName, login, logout, localAuthReady, loginReady} = useAuth()
-    //console.log(token)
-    //console.log(!!token)
+    const {
+        token,
+        userId,
+        userFirstName,
+        userSecondName,
+        userMiddleName,
+        login,
+        logout,
+        localAuthReady,
+        loginReady
+    } = useAuth()
     const isAuth = !!token
     const routes = useRoutes(isAuth)
 
-    if (!localAuthReady){
+    if (!localAuthReady) {
         return <Loader/>
     }
     return (
@@ -33,13 +37,13 @@ function App() {
             loginReady
         }}>
             <>
-            <Router>
-               {routes}
-            </Router>
+                <Router>
+                    {routes}
+                </Router>
             </>
         </AuthContext.Provider>
 
-  )
+    )
 }
 
 export default App;

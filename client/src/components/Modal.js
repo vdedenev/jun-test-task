@@ -1,20 +1,26 @@
 import React, {useContext, useEffect, useState} from 'react'
+import {AuthContext} from "../context/AuthContext";
 import Modal from 'react-modal'
 import Select from 'react-select'
 import StyledInput from './StyledInput';
-import {AuthContext} from "../context/AuthContext";
 import {useHttp} from "../hooks/http.hook";
+import {useMessage} from "../hooks/message.hook";
 
 export const ModalComp = (props) => {
+    Modal.setAppElement(document.getElementById('root'))
+    const message = useMessage()
     const auth = useContext(AuthContext)
     const [form, setForm] = useState(props.rowData)
     const {loading, req, err, clearErr} = useHttp()
 
-    //const responsibleOptions = props.responsibleOptions
-
-    useEffect( () => {
+    useEffect(() => {
         setForm(props.rowData)
     }, [props.rowData])
+
+    useEffect(() => {
+        message(err)
+        clearErr()
+    }, [err, clearErr, message])
 
     const priorityOptions = [
         {value: 3, label: 'Высокий'},
@@ -29,14 +35,12 @@ export const ModalComp = (props) => {
         {value: 1, label: 'Отменено'},
     ]
 
-    Modal.setAppElement(document.getElementById('modalEle'))
-
     const changeHandler = e => {
-        setForm({...form, [e.target.name]:e.target.value})
+        setForm({...form, [e.target.name]: e.target.value})
     }
 
     const selectChangeHandler = (opt, ctx) => {
-        setForm({...form, [ctx.name]:opt.value})
+        setForm({...form, [ctx.name]: opt.value})
     }
 
     const sendButtonHandler = async () => {
@@ -44,24 +48,24 @@ export const ModalComp = (props) => {
             const sendData = await req(`/task/${props.buttonLnk}`, 'POST', {...form, creator: auth.userId}, {
                 Authorization: `Bearer ${auth.token}`
             })
+            message('Done, task id: '+sendData.id)
             props.rerender()
             props.onClose()
-        }
-        catch (e) {
-            //
+        } catch (e) {
+            message(e.message)
         }
     }
 
     const modalStyle = {
-        content : {
+        content: {
             width: 750,
             height: 750,
-            top                   : '50%',
-            left                  : '50%',
-            right                 : 'auto',
-            bottom                : 'auto',
-            marginRight           : '-50%',
-            transform             : 'translate(-50%, -50%)'
+            top: '50%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            marginRight: '-50%',
+            transform: 'translate(-50%, -50%)'
         },
         overlay: {zIndex: 1000}
     }
@@ -80,7 +84,8 @@ export const ModalComp = (props) => {
                          marginTop: '-27px',
                          marginRight: '-10px',
                          fontSize: 40,
-                         color: '#000000'}}>
+                         color: '#000000'
+                     }}>
                     <i
                         style={{cursor: 'pointer'}}
                         onClick={props.onClose}>
@@ -133,7 +138,8 @@ export const ModalComp = (props) => {
                     value={priorityOptions.find(obj => obj.value === form.priority)}
                     onChange={selectChangeHandler}
                 />
-                <label style={{paddingBottom: 50}} htmlFor="priority" className="light-blue-text active">Priority</label>
+                <label style={{paddingBottom: 50}} htmlFor="priority"
+                       className="light-blue-text active">Priority</label>
             </div>
             <div className="input-field">
                 <Select
@@ -152,7 +158,8 @@ export const ModalComp = (props) => {
                     value={props.responsibleOptions.find(obj => obj.value === form.responsible)}
                     onChange={selectChangeHandler}
                 />
-                <label style={{paddingBottom: 50}} htmlFor="responsible" className="light-blue-text active">Responsible</label>
+                <label style={{paddingBottom: 50}} htmlFor="responsible"
+                       className="light-blue-text active">Responsible</label>
             </div>
             <button
                 style={{float: 'right'}}

@@ -23,14 +23,14 @@ export const AuthPage = () => {
     }, [])
 
     const changeHandler = event => {
-        setForm({...form, [event.target.name]:event.target.value})
+        setForm({...form, [event.target.name]: event.target.value})
     }
 
     const loginHandler = async () => {
         try {
             const data = await req('/auth/login', 'POST', {...form})
             auth.login(data.token, data.userId, data.userFirstName, data.userSecondName, data.userMiddleName)
-        } catch(e){
+        } catch (e) {
 
         }
     }
@@ -60,7 +60,7 @@ export const AuthPage = () => {
                                         onChange={changeHandler}
                                         onKeyPress={keypressHandler}
                                     />
-                                        <label htmlFor="login" className="light-blue-text">Login</label>
+                                    <label htmlFor="login" className="light-blue-text">Login</label>
                                 </div>
 
                                 <div className="input-field">

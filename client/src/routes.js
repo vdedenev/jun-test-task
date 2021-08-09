@@ -4,11 +4,11 @@ import {TaskPage} from "./pages/TaskPage";
 import {AuthPage} from "./pages/AuthPage";
 
 export const useRoutes = isAuth => {
-    if (isAuth){
+    if (isAuth) {
         return (
             <Switch>
                 <Route exact path="/task">
-                        <TaskPage />
+                    <TaskPage/>
                 </Route>
 
                 <Redirect to="/task?group=3"/>
@@ -19,8 +19,9 @@ export const useRoutes = isAuth => {
     return (
         <Switch>
             <Route path="/auth/login">
-                <AuthPage />
+                <AuthPage/>
             </Route>
+
             <Redirect to="/auth/login"/>
         </Switch>
     )

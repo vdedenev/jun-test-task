@@ -1,6 +1,7 @@
 const typeorm = require('typeorm')
 const dateformat = require('dateformat')
 const moment = require('moment')
+const {LessThanOrEqual} = require("typeorm");
 const {MoreThan} = require("typeorm");
 const {Between} = require('typeorm')
 const {validationResult} = require('express-validator')
@@ -36,7 +37,7 @@ exports.get = async (req, res) => {
                     take: 10,
                     where: {
                         responsible: req.user.userId,
-                        endingAt: MoreThan(dateformat(new Date(), 'yyyy-mm-dd'))
+                        endingAt: LessThanOrEqual(dateformat(new Date(), 'yyyy-mm-dd'))
                     }
                 })
                 )
