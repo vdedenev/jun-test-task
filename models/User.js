@@ -55,7 +55,6 @@ module.exports = new EntitySchema({
             target: "Task",
             type: "one-to-many",
             joinTable: true,
-            cascade: true,
             inverseSide: 'responsible',
         }
     }
