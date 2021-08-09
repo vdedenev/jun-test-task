@@ -20,7 +20,7 @@ async function start(){
     catch (e) {
         throw e.message
     }
-    app.listen(PORT, () => console.log(`App has been started on port ${PORT}`))
+    app.listen(process.env.PORT, () => console.log(`App has been started on port ${PORT}`))
 }
 
 start()
