@@ -10,7 +10,7 @@ app.use('/auth/', require('./routes/auth'))
 app.use('/user/', require('./routes/user'))
 
 
-const PORT = config.get('port')
+//const PORT = config.get('port')
 
 async function start(){
     try{
@@ -20,7 +20,7 @@ async function start(){
     catch (e) {
         throw e.message
     }
-    app.listen(process.env.PORT, () => console.log(`App has been started on port ${PORT}`))
+    app.listen(process.env.PORT || 3000, () => console.log(`App has been started on port ${process.env.PORT}`))
 }
 
 start()
