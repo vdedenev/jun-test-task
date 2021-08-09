@@ -1,0 +1,5 @@
+{
+  "port": 8000,
+  "saltRounds": 10,
+  "TOKEN_SECRET": "9jya&>!PQJ/#'-O"
+}
